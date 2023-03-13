@@ -36,8 +36,8 @@
     </div>
     <script>
         let form = document.getElementById('form');
-        form.addEventListener('submit', addElement);
-        function addElement(e) {
+        form.addEventListener('submit', localStore);
+        function localStore(e) {
             e.preventDefault();
             let name = document.getElementById('name').value;
             let email = document.getElementById('email').value;
@@ -48,7 +48,7 @@
             li.appendChild(document.createTextNode(fin));
             let deleteBtn = document.createElement('button');
             deleteBtn.className = "btn btn-danger btn-sm float-right delete";
-            deleteBtn.appendChild(document.createTextNode('Delete'));
+            deleteBtn.textContent='Delete';
             li.appendChild(deleteBtn);
             item.appendChild(li);
             const obj = {
@@ -57,16 +57,13 @@
                 TelePhone_No: tel
             };
             localStorage.setItem(email, JSON.stringify(obj));
-        }
-        let item = document.getElementById('item');
-        item.addEventListener('click', removeItem);
-        function removeItem(e) {
-            if (e.target.classList.contains('delete')) {
-                var li = e.target.parentElement;
+            deleteBtn.onclick=()=>{
+                localStorage.removeItem(obj.Email);
                 item.removeChild(li);
-                
+            };
             }
-        }
+           
+           
     </script>
 </body>
 
